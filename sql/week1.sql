@@ -56,3 +56,67 @@ SELECT COUNT(*)
 FROM customers
 INNER JOIN orders ON customers.id = orders.customer_id
 WHERE country = 'India';
+-- Advanced Query 1: Customer who spent the most
+SELECT customers.name, SUM(orders.amount)
+FROM customers
+INNER JOIN orders ON orders.customer_id = customers.id
+GROUP BY customers.name
+ORDER BY SUM(orders.amount) DESC
+LIMIT 1;
+
+-- Advanced Query 2: Customer with maximum number of orders
+SELECT customers.name, COUNT(orders.order_id)
+FROM customers
+INNER JOIN orders ON orders.customer_id = customers.id
+GROUP BY customers.name
+ORDER BY COUNT(orders.order_id) DESC
+LIMIT 1;
+
+-- Advanced Query 3: Customers having more than one order
+SELECT customers.name, COUNT(orders.order_id)
+FROM customers
+INNER JOIN orders ON orders.customer_id = customers.id
+GROUP BY customers.name
+HAVING COUNT(orders.order_id) > 1;
+
+-- Advanced Query 4: Customers whose total spending exceeds 30000
+SELECT customers.name, SUM(orders.amount)
+FROM customers
+INNER JOIN orders ON orders.customer_id = customers.id
+GROUP BY customers.name
+HAVING SUM(orders.amount) > 30000;
+
+-- Advanced Query 5: Products above average price
+SELECT DISTINCT product
+FROM orders
+WHERE amount > (SELECT AVG(amount) FROM orders);
+
+-- Advanced Query 6: Customers older than average age
+SELECT customers.name
+FROM customers
+WHERE age > (SELECT AVG(age) FROM customers);
+
+-- Advanced Query 7: Total spending by each customer
+SELECT customers.name, SUM(orders.amount)
+FROM customers
+INNER JOIN orders ON orders.customer_id = customers.id
+GROUP BY customers.name;
+
+-- Advanced Query 8: Average spending by each customer
+SELECT customers.name, AVG(orders.amount)
+FROM customers
+INNER JOIN orders ON orders.customer_id = customers.id
+GROUP BY customers.name;
+
+-- Advanced Query 9: Highest order amount by each customer
+SELECT customers.name, MAX(orders.amount)
+FROM customers
+INNER JOIN orders ON orders.customer_id = customers.id
+GROUP BY customers.name;
+
+-- Advanced Query 10: Number of customers in each country
+SELECT country, COUNT(customers.id)
+FROM customers
+GROUP BY country
+ORDER BY COUNT(customers.id) DESC;
+
