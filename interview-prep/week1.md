@@ -38,3 +38,97 @@ Why was it not caught earlier?
  We were focused on S&C role bugs and missed DOO role coverage.
  This is a test coverage gap — we did not have a checklist verifying all 6 roles were tested for every action.
  Lesson learned: always use a role-action matrix to ensure no role is missed.
+
+ ## HTTP Methods
+
+GET    - Read data. No body needed.
+POST   - Create new data. Send data in body.
+PUT    - Replace entire record. Send complete object.
+PATCH  - Update part of record. Send only changed fields.
+DELETE - Remove data. No body needed.
+
+## PUT vs PATCH difference
+PUT replaces the entire object. If you miss a field it gets deleted.
+PATCH updates only the fields you send. Rest stays unchanged.
+
+
+## HTTP Status Codes
+
+### 2xx Success
+200 - OK - request succeeded
+201 - Created - new resource created (after POST)
+204 - No Content - success but nothing returned (after DELETE)
+
+### 4xx Client Errors
+400 - Bad Request - wrong format or missing fields
+401 - Unauthorized - not logged in
+403 - Forbidden - logged in but no permission
+404 - Not Found - resource does not exist
+422 - Unprocessable - validation failed
+
+### 5xx Server Errors
+500 - Internal Server Error - server crashed
+502 - Bad Gateway - invalid response from upstream
+503 - Service Unavailable - server is down
+
+## 401 vs 403
+401 = not logged in at all
+403 = logged in but not allowed
+
+## 400 vs 422
+400 = request format is wrong
+422 = format is correct but values fail validation
+## HTTP Status Codes
+
+### 2xx Success
+200 - OK - request succeeded
+201 - Created - new resource created (after POST)
+204 - No Content - success but nothing returned (after DELETE)
+
+### 4xx Client Errors
+400 - Bad Request - wrong format or missing fields
+401 - Unauthorized - not logged in
+403 - Forbidden - logged in but no permission
+404 - Not Found - resource does not exist
+422 - Unprocessable - validation failed
+
+### 5xx Server Errors
+500 - Internal Server Error - server crashed
+502 - Bad Gateway - invalid response from upstream
+503 - Service Unavailable - server is down
+
+## 401 vs 403
+401 = not logged in at all
+403 = logged in but not allowed
+
+## 400 vs 422
+400 = request format is wrong
+422 = format is correct but values fail validation
+
+
+## JSON Basics
+
+JSON = JavaScript Object Notation. Language APIs use to send data.
+
+Two building blocks:
+- Objects = { } curly braces
+- Arrays  = [ ] square brackets
+
+Data types:
+- String  = "Rahul"    always double quotes
+- Number  = 28         no quotes
+- Boolean = true/false no quotes, lowercase
+- Null    = null       no quotes, lowercase
+- Array   = [1,2,3]
+- Object  = {"key": "value"}
+
+## Reading nested JSON
+response.data[0].first_name
+- response = the full object
+- data = key inside response
+- [0] = first item in the array
+- first_name = key inside that item
+
+## Common mistakes
+- Never use single quotes in JSON
+- Never put comma after the last item
